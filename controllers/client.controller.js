@@ -42,8 +42,8 @@ export const createClient = async (req, res) =>  {
             return res.status(400).json({ message: 'Un client avec ce numéro de téléphone existe déjà' })
         }
 
-        const result = await pool.query('INSERT INTO clients (name, email, phone) VALUES ($1, $2, $3) RETURNING *'
-            , [clientData.name, clientData.email, clientData.phone])
+        const result = await pool.query('INSERT INTO clients (name, firstname, phone) VALUES ($1, $2, $3) RETURNING *'
+            , [clientData.name, clientData.firstname, clientData.phone])
         res.status(201).json(result.rows[0])
 
     } catch (error) {
@@ -63,8 +63,8 @@ export const updateClientByID = async (req, res) => {
             return res.status(404).json({ message: 'Client non trouvé' })
         }
 
-        const result = await pool.query('UPDATE clients SET name = $1, email = $2, phone = $3 WHERE id = $4 RETURNING *'
-            , [clientData.name, clientData.email, clientData.phone, id])
+        const result = await pool.query('UPDATE clients SET name = $1, firstname = $2, phone = $3 WHERE id = $4 RETURNING *'
+            , [clientData.name, clientData.firstname, clientData.phone, id])
         res.status(200).json(result.rows[0])
 
     } catch (error) {
