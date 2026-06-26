@@ -7,6 +7,6 @@ router.get('/', getAllPlats)
 router.get('/:id', getPlatByID)
 router.post('/create', createPlat)
 router.put('/update/:id', updatePlatByID)
-router.delete('/delete/:id', deletePlatByID)
+router.delete('/delete/:id', deletePlatByID)    
 
 export default router
