@@ -36,8 +36,8 @@ export const createPlat = async (req, res) =>  {
             return res.status(400).json({ message: 'Données du plat manquantes' });
         }
 
-        const result = await pool.query('INSERT INTO plats (nom, description, prix, disponibilite) VALUES ($1, $2, $3, $4) RETURNING *',
-            [platData.nom, platData.description, platData.prix, platData.disponibilite]
+        const result = await pool.query('INSERT INTO plats (nom, description, prix, disponibilite, quantite) VALUES ($1, $2, $3, $4, $5) RETURNING *',
+            [platData.nom, platData.description, platData.prix, platData.disponibilite, platData.quantite]
         );
         res.status(201).json(result.rows[0]);
     } catch (error) {
@@ -62,8 +62,8 @@ export const updatePlatByID = async (req, res) => {
             return res.status(404).json({ message: 'Plat non trouvé' });
         }
 
-        const result = await pool.query('UPDATE plats SET nom = $1, description = $2, prix = $3, disponibilite = $4 WHERE id = $5 RETURNING *',
-            [platData.nom, platData.description, platData.prix, platData.disponibilite, id]
+        const result = await pool.query('UPDATE plats SET nom = $1, description = $2, prix = $3, disponibilite = $4, quantite = $5 WHERE id = $6 RETURNING *',
+            [platData.nom, platData.description, platData.prix, platData.disponibilite, platData.quantite, id]
         );
 
         res.status(200).json(result.rows[0]);
